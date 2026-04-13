@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Card Stack Effect - Refined</title>
+    <style>
+        /* Fundo Roxo mais escuro */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a0033; /* Roxo bem escuro */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Círculo Laranja maior */
+        .circle-container {
+            width: 550px; /* Aumentado */
+            height: 550px; /* Aumentado */
+            background-color: #ff8c00; 
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            perspective: 1200px;
+            transition: background 0.5s ease;
+        }
+
+        /* Container das cartas */
+        .card-stack {
+            position: relative;
+            width: 150px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilo das Cartas */
+        .card {
+            position: absolute;
+            width: 130px;
+            height: 180px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            
+            /* Invertido para a DIREITA (rotateZ positivo) */
+            transform: rotateX(50deg) rotateZ(45deg);
+        }
+
+        /* Texto: Invisível por padrão */
+        .card span {
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+            opacity: 0; 
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* Configuração de Empilhamento e Opacidade (Repouso) */
+        .card-1 { z-index: 3; opacity: 1.0; }
+        .card-2 { 
+            z-index: 2; 
+            opacity: 0.75; 
+            transform: rotateX(50deg) rotateZ(45deg) translateZ(-30px) translateY(15px); 
+        }
+        .card-3 { 
+            z-index: 1; 
+            opacity: 0.50; 
+            transform: rotateX(50deg) rotateZ(45deg) translateZ(-60px) translateY(30px); 
+        }
+
+        /* --- EFEITO HOVER (Ao passar o mouse no círculo) --- */
+        
+        .circle-container:hover .card {
+            transform: rotateX(0deg) rotateZ(0deg) translateZ(0);
+            opacity: 1;
+        }
+
+        /* Espaçamento maior entre as folhas */
+        .circle-container:hover .card-1 {
+            transform: translateX(-180px); /* Afastado para esquerda */
+        }
+
+        .circle-container:hover .card-2 {
+            transform: translateX(0); /* Centralizado */
+        }
+
+        .circle-container:hover .card-3 {
+            transform: translateX(180px); /* Afastado para direita */
+        }
+
+        /* Mostrar texto apenas no Hover */
+        .circle-container:hover .card span {
+            opacity: 1;
+            transition-delay: 0.3s; /* Delay suave para o texto aparecer */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="circle-container">
+        <div class="card-stack">
+            <div class="card card-1">
+                <span>Informação Principal</span>
+            </div>
+            <div class="card card-2">
+                <span>Detalhes Técnicos</span>
+            </div>
+            <div class="card card-3">
+                <span>Configurações</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
